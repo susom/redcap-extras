@@ -78,8 +78,9 @@ function renderImageMap(params) {
 	// Hide the input on surveys only
 	if (page == "surveys/index.php") {
 		// Hide Checkbox Fields
-//		$('.frmrdh',tr).hide();
-//		$('.frmrd',tr).hide();
+		$('.frmrdh',tr).hide();
+		$('.frmrd',tr).hide();
+		// Hide text input
 		$('input[type=text][name="'+params.field+'"]').hide();
 		//$(result).css('display','none');
 	}
