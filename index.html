@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="REDCap Extras : Custom plugins, hooks, DET, and API examples" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>REDCap Extras</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/susom/redcap-extras">View on GitHub</a>
+
+          <h1 id="project_title">REDCap Extras</h1>
+          <h2 id="project_tagline">Custom plugins, hooks, DET, and API examples</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/susom/redcap-extras/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/susom/redcap-extras/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="welcome-to-redcap-extras" class="anchor" href="#welcome-to-redcap-extras"><span class="octicon octicon-link"></span></a>Welcome to REDCap Extras</h3>
+
+<p>This is a home for custom code written to extend REDCap.  It is intended to be collaborative for those users that register to be a part of this wiki.</p>
+
+<h3>
+<a name="blog" class="anchor" href="#blog"><span class="octicon octicon-link"></span></a>Blog</h3>
+
+<p><strong>6/19/2014</strong></p>
+
+<p>I'm pushing out an initial release of the imagemap hook (compatible with version 5.10 and up).  This allows you to insert an image map into a REDCap project.  The image map field can either be a text question (in which case it will save the selected areas as a comma-separated-list) or it can a be a checkbox question (in which case there should be an option for each selected value).</p>
+
+<p>As part of the design I made it so all data is funneled through PHP so you do not need to expose the hooks directory to the outside web - even the images are written to the page as base64 encoded variables so there should be no client-side pulls.</p>
+
+<p>If this framework seems acceptable to others, I think we can build a robust set of javascript-based survey extensions for REDCap to add all sorts of features.  Mod-away!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">REDCap Extras maintained by <a href="https://github.com/susom">susom</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-4922748-5");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
