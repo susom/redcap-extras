@@ -1,0 +1,11 @@
+"Variable / Field Name","Form Name","Section Header","Field Type","Field Label","Choices, Calculations, OR Slider Labels","Field Note","Text Validation Type OR Show Slider Number","Text Validation Min","Text Validation Max",Identifier?,"Branching Logic (Show field only if...)","Required Field?","Custom Alignment","Question Number (surveys only)","Matrix Group Name","Matrix Ranking?"
+record_id,image_map_test,,text,"Record ID",,,,,,,,,,,,
+gender,image_map_test,,checkbox,"Pick your pain map...","1, male | 2, female",,,,,,,y,,,,
+test_male,image_map_test,"Pain Details",text,"Here is the male.
+
+This is what you have checked:
+[test_male]",,@IMAGEMAP=PAINMAP_MALE,,,,,"[gender(1)] = '1'",,LV,,,
+test_male_cb,image_map_test,,checkbox,"Here is the male checkbox version.
+Don't you dare click on my face!","f01, f01 (doesnt matter what I put here since it isnt going to be displayed) | f02, f02 | f03, f03 | f04, f04 | f05, f05 | f06, f06 | f07, f07 | f08, f08 | f09, f09 | f10, f10 | f11, f11 | f12, f12 | f13, f13 | f14, f14 | f15, f15 | f16, f16 | f17, f17 | f18, f18 | f19, f19 | f20, f20 | f21, f21 | f22, f22 | f23, f23 | f24, f24 | f25, f25 | f26, f26 | f27, f27 | f28, f28 | f29, f29 | f30, f30 | f31, f31 | f32, f32 | f33, f33 | f34, f34 | f35, f35 | f36, f36 | b01, b01 | b02, b02 | b03, b03 | b04, b04 | b05, b05 | b06, b06 | b07, b07 | b08, b08 | b09, b09 | b10, b10 | b11, b11 | b12, b12 | b13, b13 | b14, b14 | b15, b15 | b16, b16 | b17, b17 | b18, b18 | b19, b19 | b20, b20 | b21, b21 | b22, b22 | b23, b23 | b24, b24 | b25, b25 | b26, b26 | b27, b27 | b28, b28 | b29, b29 | b30, b30 | b31, b31 | b32, b32 | b33, b33 | b34, b34 | b35, b35 | b36, b36 | b37, b37 | b38, b38",@IMAGEMAP=PAINMAP_MALE,,,,,"[gender(1)] = '1'",,LH,,,
+conditional_text,image_map_test,,descriptive,"<div class='red'><h2><center>My duele la cabeza!</center></h2></div>",,,,,,,"[test_male_cb(f01)] = '1' or [test_male_cb(f02)] = '1' or [test_male_cb(f03)] = '1' or [test_male_cb(f04)] = '1'",,,,,
+test_female,image_map_test,,text,"This is the field_label and will be rendered above the image map. This is a female example.  Notice that you could potentially put multiple @tags together in a single field (although this one doesn't do anything)",,"@IMAGEMAP=PAINMAP_FEMALE @OTHER",,,,,"[gender(2)] = '1'",,LH,,,

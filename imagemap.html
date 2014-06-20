@@ -35,9 +35,14 @@
 <a name="welcome-to-redcap-extras" class="anchor" href="#welcome-to-redcap-extras"><span class="octicon octicon-link"></span></a>The @IMAGEMAP Hook</h3>
 
 <p>The imagemap hook is an extension that allows you to collect data from a survey using an interactive imagemap.  Below is a screen shot of a sample image:</p>
-<img src='images/imagemap_example.png'/>
+<img src='images/painmap_survey_image.png'/>
 <p>To create your own imagemap, you must create a PNG image and then create the 'areas' html elements that cover the selectable spots on the map.  Each area element should contain a data-key value with the id for that area of the map.  Lastly, you have to modify the imagemap.php file to add to the imageMapLibrary array for your new map. (more elaborate instructions to be developed)</p>
-<p>Once the @IMAGEMAP function is enabled for your project or installation, you simply need to create either a TEXT question or a CHECKBOX question and insert @IMAGEMAP=MAPNAME in the notes field.  For example, @IMAGEMAP=PAINMAP_MALE for a male pain map.  If you use a text field you will save a comma-separated list of selected areas.  If you use a checkbox field, you should define value options where the key value matches all of the zones of your imagemap.  Below is an example data dictionary that works with the painmaps developed at Stanford University.</p>	
+<p>Once the @IMAGEMAP function is enabled for your project or installation, you simply need to create either a TEXT question or a CHECKBOX question and insert @IMAGEMAP=MAPNAME in the notes field.  For example, @IMAGEMAP=PAINMAP_MALE for a male pain map.</p>
+<img src='images/painmap_data_dictionary.png'/>
+<p>If you use a text field you will save a comma-separated list of selected areas.  If you use a checkbox field, you should define value options where the key value matches all of the zones of your imagemap.</p>
+<img src='images/painmap_data_dictionary_checkbox.png'/>
+<p>Below is an example data dictionary that works with the painmaps developed at Stanford University.</p>	
+<a href='images/HookImageMap_DataDictionary_2014-06-19.csv'>Imagemap Hook Example Data Dictionary</a>
       </section>
     </div>
 
