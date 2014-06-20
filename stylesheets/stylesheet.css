@@ -286,7 +286,7 @@ Full-Width Styles
   border-bottom-right-radius: 2px;
 }
 
-.request_link {
+a.request_link {
     display: block;
     padding: 10px 50px 10px 10px;
 	margin: 0px 100px;
