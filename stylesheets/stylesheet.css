@@ -269,9 +269,8 @@ Full-Width Styles
   margin: 0 auto;
 }
 
-#
-
-#forkme_banner {
+a.top_link {
+  width: 200px;
   display: block;
   position: absolute;
   top:0;
