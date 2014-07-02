@@ -20,6 +20,10 @@
 
 ###################
 # Allow custom code in each REDCap survey page
+# This is a generic hook that enables survey code customization.  It does so in two ways: global and per-project
+# Please note that since they are enabled sequentially, any functions defined in the first will be available in
+# subsequent scripts so you have to be careful about redefining helper functions, etc.. as they could throw an error
+# if they already exist
 function redcap_survey_page($project_id, $record, $instrument, $event_id, $group_id, $survey_hash, $response_id)
 {    
 	// Check for a global script that applies to all projects
@@ -35,7 +39,7 @@ function redcap_survey_page($project_id, $record, $instrument, $event_id, $group
 
 ###################
 # Verifies usernames added to projects against our LDAP directory before creating users in REDCap
-# This is a custom-stanford hook but could be extended for other LDAP-based users
+# This is a custom Stanford hook but could be extended for other LDAP-based users
 function redcap_custom_verify_username($username) {
 	// Check for a global script that applies to all projects
 	$global_handler_script = dirname(__FILE__) . "/global/redcap_custom_verify_username.php";

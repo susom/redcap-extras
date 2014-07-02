@@ -1,15 +1,20 @@
 <?php
 	
-/*
-	I have written a number of javascript-based hooks that are configured by using
-	the notes field with '@FUNCTION' as a shortcut.  By placing this code as a global hook
-	I need only scan the questions once which saves time.  If you were only running extensions
-	on a project-specific level, you could consider moving this to the project-specific
-	hook.
+/**
+
+	This is a utility script that builds an array of hook functions based on a convention of using
+	@FUNCTION=PARAMS in the notes field of certain questions.
+
+	Currently, examples include:
+
+	@IMAGEMAP=PAINMAP_MALE
+	@MEDIAPLAYER={json parameters}
+
+	This format is in flux...  The json is nice since you can include multiple parameters easier, but I currently don't support linefeeds and spaces, as some questions could have multiple functions...  I'll try to patch this in the future and settle on a final convention.
 
 	Andrew Martin
 	Stanford University
-*/
+**/
 
 
 // File all terms on the current page of the survey with '@' signs in the notes field
@@ -18,7 +23,7 @@ global $elements, $Proj;
 // This is an array of found functions as keys and arrays of matching fields as values
 $hook_functions = array();
 
-// This is an array of with fields as keys and then functions (with parameters and values)
+// This is an array of with fields as keys and then functions (with parameters and values) - TBD?
 $hook_fields = array();
 
 // Scan through pages rendered on this page searching for @terms
@@ -38,10 +43,13 @@ foreach ($elements as $k => $element) {
 				$hook_fields[$element['field']] = $matches;
 				foreach ($matches as $match) {
 					// Some terms have a name=params format, if so, break out params
-					list($hook_name,$hook_params) = explode('=',$match);
+					list($hook_name,$hook_details) = explode('=',$match);
 					$hook_functions[$hook_name] = array_merge(
 							isset($hook_functions[$hook_name]) ? $hook_functions[$hook_name] : array(),
-							array($element['field'] => $hook_params)
+							array($element['field'] => array(
+								'elements_index' => $k,
+								'params' => $hook_details)
+							)
 					);
 				}
 			}

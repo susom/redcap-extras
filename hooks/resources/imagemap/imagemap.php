@@ -63,7 +63,10 @@ echo "</script>";
 
 # Step 2 - for each function to be run, inject the proper images/area maps
 $startup_vars = array();
-foreach($hook_functions[$term] as $field => $params) {
+foreach($hook_functions[$term] as $field => $details) {
+	// Get the elements index and parameters from the details array
+	$elements_index = $details['elements_index'];
+	$params = $details['params'];
 	if (isset($imageMapLibrary[$params])) {
 		if (!isset($startup_vars[$params])) {
 			// Copy the default parameters
@@ -79,6 +82,8 @@ foreach($hook_functions[$term] as $field => $params) {
 			// Load the area map
 			$areas = file_get_contents(dirname(__FILE__) . DS . $js_params['map']);
 			$js_params['areas'] = $areas;
+			// Add the question type (text or checkbox)
+			$js_params['type'] = $elements[$elements_index]['rr_type'];
 			$startup_vars[] = $js_params;
 		}
 	} else {
