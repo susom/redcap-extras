@@ -5,5 +5,5 @@ Custom plugins, hooks, DET, and API examples.  This is a public repository for e
 
 There is a separate private repository for the REDCap plugin committee where we are developing best-practice standards.  Perhaps one day these examples can be improved upon and blessed by the committee, but at this time they are use-at-your-own-risk.
 
-If you are interested in joining the REDCap Pluing Committee where you can help contribute to building better extensions, please email the consortium google groups (or contact your REDCap admin if you don't have access to the group).
+If you are interested in joining the REDCap Plugin Committee where you can help contribute to building better extensions, please email the consortium google groups (or contact your REDCap admin if you don't have access to the group).
 
