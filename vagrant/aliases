@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# LICENSE
+# Copyright (c) 2015, University of Florida
+# All rights reserved.
+#
+# Distributed under the BSD 3-Clause License
+# For full text of the BSD 3-Clause License see http://opensource.org/licenses/BSD-3-Clause
+
+# Manipulate services
+alias restart_httpd='sudo /etc/init.d/apache2 reload'
+alias restart_mysql='sudo service mysql restart'
+
+# Check REDCap web app status
+alias check_redcap="curl -s http://localhost/redcap/ | grep -i  'Welcome\|Critical Error' "
+
+# Interact with the REDCap Database
+alias db='mysql --prompt="(\u@\h) [\d]> " --pager="less -niSFX" -uredcap -ppassword redcap'
+alias remove_ban='echo "Query run: DELETE FROM redcap_ip_banned;" && mysql -uredcap -ppassword redcap -e "DELETE FROM redcap_ip_banned;" '
+alias show_columns='mysql -uredcap -ppassword redcap -e "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, DATA_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = \"redcap\" " '
+alias show_logs='mysql -uredcap -ppassword redcap -e "SELECT log_event_id, ip, object_type, event_id, data_values, description, sql_log FROM redcap_log_event ORDER BY log_event_id DESC LIMIT 10" '
+alias redcap_version='mysql -uredcap -ppassword redcap -se "select value from redcap.redcap_config WHERE field_name = \"redcap_version\";" | tail -n 1'
