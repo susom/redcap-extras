@@ -1,6 +1,14 @@
 #!/bin/bash
 
-# LICENSE
+# Contributors:
+#    Christopher P. Barnes <senrabc@gmail.com>
+#    Andrei Sura: github.com/indera
+#    Mohan Das Katragadda <mohan.das142@gmail.com>
+#    Philip Chase <philipbchase@gmail.com>
+#    Ruchi Vivek Desai <ruchivdesai@gmail.com>
+#    Taeber Rapczak <taeber@ufl.edu>
+#    Josh Hanna <josh@hanna.io>
+
 # Copyright (c) 2015, University of Florida
 # All rights reserved.
 #
