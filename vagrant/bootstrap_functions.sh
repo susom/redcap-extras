@@ -44,6 +44,15 @@ function install_redcap() {
     chown -R www-data.root /var/www/redcap/edocs/
     chown -R www-data.root /var/www/redcap/temp/
 
+    # remove the hooks and plugins directory from the zip folder
+    rm -rf /var/www/redcap/plugins
+    rm -rf /var/www/redcap/hooks
+
+    # create sym links
+    ln -s /redcap_data/hooks/ /var/www/redcap/ 
+    ln -s /redcap_data/plugins/ /var/www/redcap/
+
+
     REDCAP_VERSION_DETECTED=`ls /var/www/redcap | grep redcap_v | cut -d 'v' -f2 | sort -n | tail -n 1`
     echo "$REDCAP_ZIP content indicates REDCap version: $REDCAP_VERSION_DETECTED"
 
