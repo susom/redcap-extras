@@ -1,4 +1,16 @@
-
+<!--
+# Contributors:
+#    
+#    Andrei Sura: github.com/indera
+#    Sanath Kumar Pasumarthy: github.com/sanathp
+#	 Radha Krishna Murthy Kandula : <radhakrishna.nani@gmail.com>
+#
+# Copyright (c) 2015, University of Florida
+# All rights reserved.
+#
+# Distributed under the BSD 3-Clause License
+# For full text of the BSD 3-Clause License see http://opensource.org/licenses/BSD-3-Clause
+-->
 <h2 style="color:#800000;">
 	Form URL Plugin
 </h2>
