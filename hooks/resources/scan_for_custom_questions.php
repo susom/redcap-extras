@@ -35,8 +35,8 @@ foreach ($elements as $k => $element) {
 		$note = $Proj->metadata[$element['field']]['element_note'];
 		// Using a strpos search initially as it is faster than regex search
 		if (strpos($note,'@') !== false) {
-			// We have a potential match - lets get all terms (separated by spaces)
-			preg_match_all('/@\S+/', $note, $matches);
+			// We have a potential match - lets get all terms
+			preg_match_all('/(@\w+)(=(.*?|\S+?)((?=\s*@)|(?=\s*$)))?/', $note, $matches);
 			if ($matches) {
 				// We have found matches - let's parse them
 				$matches = reset($matches);
