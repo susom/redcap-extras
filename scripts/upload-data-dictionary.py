@@ -11,6 +11,9 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
+
+DEFAULT_URL = 'http://127.0.0.1:8000/redcap/index.php'
+
 def upload_data_dictionary(project_url, local_path, headless=False,
                            username=None, password=None):
     fullpath = os.path.abspath(local_path)
@@ -51,26 +54,21 @@ def upload_data_dictionary(project_url, local_path, headless=False,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('url', help='URL of the REDCap Project')
-    parser.add_argument('data-dictionary', help='path of the Data Dictionary')
+    parser.add_argument('-url','--url', help='URL of the REDCap Project',default=DEFAULT_URL)
+    parser.add_argument('-data_dictionary','--data_dictionary', help='path of the Data Dictionary')
     parser.add_argument('-s', '--show', action='store_true', default=False,
                         help='run Firefox instead of PhantomJS')
-    parser.add_argument('-c', '--credentials',
-                        help='file that only contains the REDCap username and '
-                             'password to use, separated by a vertical pipe. '
-                             'Use "-" to read from stdin. Example: '
-                             '"username|password"',
-                        type=argparse.FileType('r'))
+    parser.add_argument('-username', '--username', help='Enter username',
+                        default=None)
+    parser.add_argument('-password', '--password', help='Enter password',
+                        default=None)
+
     args = vars(parser.parse_args())
 
-    credentials = args['credentials']
-    if credentials:
-        username, password = credentials.read().split('|')
-    else:
-        username, password = None, None
+    username = args['username']
+    password = args['password']
 
-
-    upload_data_dictionary(args['url'], args['data-dictionary'],
+    upload_data_dictionary(args['url'], args['data_dictionary'],
                            not args['show'], username, password)
 
 
