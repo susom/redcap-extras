@@ -9,20 +9,15 @@
 
 # Displays usage
 function usage() {
-	echo "Usage: ${0} [--no-color]  Install the Red-Cap Project"
-	echo "       ${0} --dump        Show the configuration and quit"
-	echo "       ${0} -h | --help   Show this helpful, usage information"
+	echo "Usage:" 
 	echo ''
-	echo 'OPTIONS:'
+	echo "${0} name_of_the_project data_dictionary_path"
 	echo ''
-	echo '  --no-color    Disable the use of color in output'
+	echo "${0} -h | --help   Show this helpful, usage information"
 	echo ''
-	echo 'ENVIRONMENT VARIABLES:'
-	echo ''
-	echo '  REDCAP_URL    Base URL for the REDCap server on which you wish to '
-	echo '                install the ADRC Project'
-	echo '  REDCAP_AUTH   location of the file which contains the REDCap '
-	echo '                username and password (separated by a vertical pipe)'
+	echo 'The Default Project url is http://127.0.0.1:8080/redcap/index.php'
+	echo 'If Thats Not your Red cap url run the script with url as the 3rd parameter'
+	echo "${0} name_of_the_project data_dictionary_path project_url"
 	echo ''
 }
 
@@ -83,10 +78,6 @@ failed=✘
 if [ "${1}" == '-h' ] || [ "${1}" == '--help' ]; then
 	usage
 	exit
-elif [ "${1}" == '--dump' ]; then
-	echo "REDCAP_AUTH=${REDCAP_AUTH}"
-	echo "REDCAP_URL=${REDCAP_URL}"
-	exit
 elif [ "${1}" == '--no-color' ]; then
 	COLOR_SWITCH='--no-color'
 	green=''
@@ -94,19 +85,29 @@ elif [ "${1}" == '--no-color' ]; then
 	NC=''
 	passed='ok'
 	failed='FAIL'
-elif [ "${1}" != '' ]; then
-	error "Unrecognized arguments"
-	usage
-	exit 1
+elif [ "${1}" != '' ] && [ "${2}" != '' ] && [ "${3}" != '' ]; then
+	PROJECT_NAME=${1}
+    CSV_LOCATION=${2}
+    PROJECT_URL=${3}
+elif [ "${1}" != '' ] && [ "${2}" != '' ]; then
+	PROJECT_NAME=${1}
+    CSV_LOCATION=${2}
+else
+  error "Unrecognized arguments"
+  usage
+  exit 1
 fi
 
-info 'Starting to Create a Redcap -Extras project'
+read -p "Enter Username :" Username
+read -p "Enter Password :" Password
+
+info 'Starting to Create a Redcap project'
 
 # Check dependencies: phantomjs and selenium
 info 'Checking dependencies...'
 check_req 'phantomjs' 'type phantomjs' 'brew install phantomjs'
 check_req ' selenium' 'pip freeze | grep selenium' 'pip install selenium'
-PREFIX=$(pwd)
+
 if [ ! -z "$global_missing_dep" ]
 then
 	error 'ERROR! missing dependencies.'
@@ -130,28 +131,27 @@ set -e
 # Before exiting, run `on_exit`
 trap 'on_exit' EXIT
 info 'Creating REDCap Project... '
-PROJECT_INFO=${ADRC_PREFIX}/project.info
-if [ ! -z $REDCAP_AUTH ]
-then
-	CREDENTIALS="--credentials=${REDCAP_AUTH}"
+
+PROJECT_INFO=${PREFIX}/project.info
+
+if [ "$PROJECT_URL" == '' ] ;then
+	python ${DIR}/create-project.py --quiet --project=${PROJECT_NAME} --username=$Username --password=$Password| tee ${PROJECT_INFO}
+else
+	python ${DIR}/create-project.py --quiet --project=${PROJECT_NAME} --url=$PROJECT_URL --username=$Username --password=$Password| tee ${PROJECT_INFO}
 fi
-
-python ${DIR}/create-project.py --quiet --project='RedCapExtras' $CREDENTIALS | tee ${PROJECT_INFO}
-
 # Read the dynamically generated API Token from project.info
 API_TOKEN=$(cat $PROJECT_INFO | grep ^API | cut -c11- | sed 's/^ *\(.*\)*$/\1/')
-# Read the dynamically generated Project URL from project.info
-PROJECT_URL=$(cat $PROJECT_INFO | grep ^Project | cut -c20- | sed 's/^ *\(.*\)*$/\1/')
 # Read the dynamically generated Project ID from the PROJECT_URL
 PROJECT_ID=$(echo $PROJECT_URL | grep -o 'pid=[[:digit:]]*' | cut -c5-)
 
-
-
 # Merge into one data dictionary and upload
 
-info "Uploading merged data dictionary from:  ${PREFIX}/data-dictionary.csv... $CREDENTIALS $PROJECT_URL"
-python $DIR/upload-data-dictionary.py $CREDENTIALS $PROJECT_URL ${PREFIX}/data-dictionary.csv
-
+info "Uploading merged data dictionary from:  ${CSV_LOCATION} to $PROJECT_URL"
+if [ "$PROJECT_URL" == '' ] ;then
+		python $DIR/upload-data-dictionary.py --data_dictionary=${CSV_LOCATION} --username=$Username --password=$Password -s
+else	
+	python $DIR/upload-data-dictionary.py --url=$PROJECT_URL --data_dictionary=${CSV_LOCATION} --username=$Username --password=$Password -s
+fi
 #TODO: Upload test data from actors
 #      find . -name 'data.csv' -print0 | xargs -0 python import_data.py
 
