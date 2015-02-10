@@ -19,8 +19,8 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 
-DEFAULT_URL = 'http://127.0.0.1:8080/redcap/index.php'
-DEFAULT_PROJECT_NAME = 'Red-Cap Extras'
+DEFAULT_URL = 'http://127.0.0.1:8000/redcap/index.php'
+DEFAULT_PROJECT_NAME = 'RedCapExtras'
 
 
 def create_project(base_url, project_name, headless=False, username=None,
@@ -76,30 +76,24 @@ def main():
                         default=DEFAULT_PROJECT_NAME)
     parser.add_argument('-u', '--url', help='base address of the REDCap Server',
                         default=DEFAULT_URL)
-    parser.add_argument('-c', '--credentials',
-                        help='file that only contains the REDCap username and '
-                             'password to use, separated by a vertical pipe. '
-                             'Use "-" to read from stdin. Example: '
-                             '"username|password"',
-                        type=argparse.FileType('r'))
+    parser.add_argument('-username', '--username', help='Enter username',
+                        default=None)
+    parser.add_argument('-password', '--password', help='Enter password',
+                        default=None)
     args = vars(parser.parse_args())
 
     url = args['url']
     project_name = args['project']
+    username = args['username']
+    password = args['password']
 
     if not args['quiet']:
         url = prompt('REDCap Base Web Address (URL)?', args['url'])
         project_name = prompt('Project name?', args['project'])
 
-    credentials = args['credentials']
-    if credentials:
-        username, password = credentials.read().split('|')
-    else:
-        username, password = None, None
+    #credentials = args['credentials']
 
     create_project(url, project_name, args['quiet'], username, password)
 
-
 if __name__ == '__main__':
     main()
-
