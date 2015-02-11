@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-DEFAULT_URL = 'http://127.0.0.1:8000/redcap/index.php'
+DEFAULT_URL = 'http://127.0.0.1:8080/redcap/index.php'
 
 def upload_data_dictionary(project_url, local_path, headless=False,
                            username=None, password=None):
@@ -23,6 +23,9 @@ def upload_data_dictionary(project_url, local_path, headless=False,
         driver.set_window_size(1024, 768)
     else:
         driver = webdriver.Firefox()
+    
+    driver = webdriver.PhantomJS()
+    driver.set_window_size(1024, 768)
 
     try:
         driver.implicitly_wait(3)

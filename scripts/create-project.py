@@ -19,7 +19,7 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 
-DEFAULT_URL = 'http://127.0.0.1:8000/redcap/index.php'
+DEFAULT_URL = 'http://127.0.0.1:8080/redcap/index.php'
 DEFAULT_PROJECT_NAME = 'RedCapExtras'
 
 

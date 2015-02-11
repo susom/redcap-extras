@@ -132,6 +132,8 @@ set -e
 trap 'on_exit' EXIT
 info 'Creating REDCap Project... '
 
+PREFIX=$(pwd)
+
 PROJECT_INFO=${PREFIX}/project.info
 
 if [ "$PROJECT_URL" == '' ] ;then
@@ -141,6 +143,8 @@ else
 fi
 # Read the dynamically generated API Token from project.info
 API_TOKEN=$(cat $PROJECT_INFO | grep ^API | cut -c11- | sed 's/^ *\(.*\)*$/\1/')
+# Read the dynamically generated Project URL from project.info
+PROJECT_URL=$(cat $PROJECT_INFO | grep ^Project | cut -c20- | sed 's/^ *\(.*\)*$/\1/')
 # Read the dynamically generated Project ID from the PROJECT_URL
 PROJECT_ID=$(echo $PROJECT_URL | grep -o 'pid=[[:digit:]]*' | cut -c5-)
 
