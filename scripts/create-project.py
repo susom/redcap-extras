@@ -1,5 +1,16 @@
 #!/usr/bin/env python
 
+# Contributors:
+#    Taeber Rapczak <taeber@ufl.edu>
+#    Sanath Kumar Pasumarthy: github.com/sanathp
+#    Philip Chase <philipbchase@gmail.com>
+
+# Copyright (c) 2015, University of Florida
+# All rights reserved.
+#
+# Distributed under the BSD 3-Clause License
+# For full text of the BSD 3-Clause License see http://opensource.org/licenses/BSD-3-Clause
+
 """
 Creates a REDCap Project using Selenium
 

@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Contributors:
+#    Taeber Rapczak <taeber@ufl.edu>
+#    Sanath Kumar Pasumarthy: github.com/sanathp
+#    Philip Chase <philipbchase@gmail.com>
+
+# Copyright (c) 2015, University of Florida
+# All rights reserved.
+#
+# Distributed under the BSD 3-Clause License
+# For full text of the BSD 3-Clause License see http://opensource.org/licenses/BSD-3-Clause
 
 import argparse
 import os
@@ -23,7 +33,7 @@ def upload_data_dictionary(project_url, local_path, headless=False,
         driver.set_window_size(1024, 768)
     else:
         driver = webdriver.Firefox()
-    
+
     driver = webdriver.PhantomJS()
     driver.set_window_size(1024, 768)
 

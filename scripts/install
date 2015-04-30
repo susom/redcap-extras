@@ -2,6 +2,16 @@
 #
 # Installation Script for Red-Cap Extras
 #
+# Contributors:
+#    Taeber Rapczak <taeber@ufl.edu>
+#    Sanath Kumar Pasumarthy: github.com/sanathp
+#    Philip Chase <philipbchase@gmail.com>
+
+# Copyright (c) 2015, University of Florida
+# All rights reserved.
+#
+# Distributed under the BSD 3-Clause License
+# For full text of the BSD 3-Clause License see http://opensource.org/licenses/BSD-3-Clause
 
 ### parameters ################################################################
 
@@ -9,7 +19,7 @@
 
 # Displays usage
 function usage() {
-	echo "Usage:" 
+	echo "Usage:"
 	echo ''
 	echo "${0} name_of_the_project data_dictionary_path"
 	echo ''
@@ -153,7 +163,7 @@ PROJECT_ID=$(echo $PROJECT_URL | grep -o 'pid=[[:digit:]]*' | cut -c5-)
 info "Uploading merged data dictionary from:  ${CSV_LOCATION} to $PROJECT_URL"
 if [ "$PROJECT_URL" == '' ] ;then
 		python $DIR/upload-data-dictionary.py --data_dictionary=${CSV_LOCATION} --username=$Username --password=$Password -s
-else	
+else
 	python $DIR/upload-data-dictionary.py --url=$PROJECT_URL --data_dictionary=${CSV_LOCATION} --username=$Username --password=$Password -s
 fi
 #TODO: Upload test data from actors
