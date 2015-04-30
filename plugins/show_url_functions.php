@@ -70,7 +70,7 @@ function getUrlForEvent($project_name, $study_id, $event_name, $page_name) {
         'event_id' => $event_details['event_id']
    );
 
-   $url = "http://" . $_SERVER['HTTP_HOST'] . "/redcap/redcap_v5.7.4/DataEntry/index.php?"
+   $url = "http://" . $_SERVER['HTTP_HOST'] . "/redcap/redcap_v6.0.5/DataEntry/index.php?"
 	. http_build_query($url_data);
    return $url;
 }
