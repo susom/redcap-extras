@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.synced_folder "../hooks/", "/redcap_data/hooks/", owner: "root", group: "root"
   config.vm.synced_folder "../plugins/", "/redcap_data/plugins/", owner: "root", group: "root"
- config.vm.provision "shell" do |s|
+  config.vm.provision "shell" do |s|
   	s.path = "bootstrap.sh"
   end
 end

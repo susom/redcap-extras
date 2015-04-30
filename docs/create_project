@@ -1,16 +1,16 @@
-Prerequisites: 
-Python,Selenium,Firefox,PhatomJs(Optional) should be installed on your system.
+Prerequisites:
+Python, Selenium, Firefox, and PhantomJs(Optional) should be installed on your system.
 check install_prerequisites file for detailed instrutcions:
 
 Instructions for creating a REDCAP Project:
 ===========================================
 
-Step 1: 
+Step 1:
 ------
-Navigate to scripts folder 
+Navigate to scripts folder
 
 Step 2:
------- 
+------
 
 Run the below command with project name and data-dictionary location as your arguments
 
@@ -25,14 +25,14 @@ Step 4:
 ------
 
 If no errors have been displayed you project creation and data dictionary upload was successfull. Open Redcap home page in your browser and navigate to My Projects tab.
-If errors skip to step 5 . 
+If errors skip to step 5 .
 
 Step 5:
 ------
 Debugging :
 
-case 1) The default url is http://127.0.0.1:8080/redcap/index.php .If by any chance your Redcap home page url is not this you can give your custom url as the 3rd argument while running the shell script in step 2
-	
+Case 1) The default url is http://127.0.0.1:8080/redcap/index.php .If by any chance your Redcap home page url is not this you can give your custom url as the 3rd argument while running the shell script in step 2
+
 	./install <project-name> <data-dictionary-path> <redcap-url>
 
-case 2) There are chances that even if you have set username and password ,the browser might redirect to homepage if you have an active session . Try to run the script as mentioned in step 2 with username and password as blank.
+Case 2) There are chances that even if you have set username and password ,the browser might redirect to homepage if you have an active session . Try to run the script as mentioned in step 2 with username and password as blank.
