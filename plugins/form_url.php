@@ -1,9 +1,9 @@
 <!--
 # Contributors:
-#    
+#
 #    Andrei Sura: github.com/indera
 #    Sanath Kumar Pasumarthy: github.com/sanathp
-#	 Radha Krishna Murthy Kandula : <radhakrishna.nani@gmail.com>
+#    Radha Krishna Murthy Kandula : <radhakrishna.nani@gmail.com>
 #
 # Copyright (c) 2015, University of Florida
 # All rights reserved.
@@ -14,19 +14,19 @@
 <html>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	
+
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-	
+
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Form URL Plugin</h1>      
-			<p>This plugin will help generate a direct URL to the required form, given the Project Name, Study ID and Page name.</p>      
+			<h1>Form URL Plugin</h1>
+			<p>This plugin will help generate a direct URL to the required form, given the Project Name, Study ID and Page name.</p>
 		</div>
 	<body>
-	
+
 	<div id="login" class="container" style="width:50%;">
 		<form role="form" action="show_url.php" method="post" width="5%">
 			<div class="form-group">
