@@ -1,9 +1,11 @@
-Prerequisites:
-Python, Selenium, Firefox, and PhantomJs(Optional) should be installed on your system.
-check install_prerequisites file for detailed instrutcions:
+Instructions for creating a REDCAP Project
+==========================================
 
-Instructions for creating a REDCAP Project:
-===========================================
+Prerequisites
+-------------
+
+Python, Selenium, Firefox, and PhantomJs(Optional) must be installed on your system to use these tools.  Check install_prerequisites.md file for detailed instructions:
+
 
 Step 1:
 ------
