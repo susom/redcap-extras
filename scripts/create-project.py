@@ -80,8 +80,11 @@ def prompt(question, default=None):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-q', '--quiet', action='store_true', default=False,
+    parser.add_argument('-H', '--headless', action='store_true', default=False,
                         help='run PhantomJS instead of Firefox and assume '
+                             'default to all prompts')
+    parser.add_argument('-q', '--quiet', action='store_true', default=False,
+                        help='don\'t prompt for required variables and '
                              'default to all prompts')
     parser.add_argument('-p', '--project', help='name of the REDCap Project',
                         default=DEFAULT_PROJECT_NAME)
@@ -104,7 +107,7 @@ def main():
 
     #credentials = args['credentials']
 
-    create_project(url, project_name, args['quiet'], username, password)
+    create_project(url, project_name, args['headless'], username, password)
 
 if __name__ == '__main__':
     main()
