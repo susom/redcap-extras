@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.3] - 2015-04-30
+### Added
+- Add a Change Log compliant with http://keepachangelog.com/
+- Add selenium scratch files to .gitignore
+- Add ./scripts/ folder and scripts to create a project and load a data dictionary
+- Add docmentation on selenium prerequisites and project creation scripts
+- Add url rewriting plugin in ./plugins
+- Add the BSD license text to the ./vagrant folder
+
+### Changed
+- Vagrant VM now links ./plugins/ and ./hooks/ into REDCap's default location
+
+
 ## [0.0.2] - 2015-01-20
 ### Added
  - Add a REDCap testing VM based on Vagrant (Philip Chase)
