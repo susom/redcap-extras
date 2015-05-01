@@ -34,9 +34,6 @@ def upload_data_dictionary(project_url, local_path, headless=False,
     else:
         driver = webdriver.Firefox()
 
-    driver = webdriver.PhantomJS()
-    driver.set_window_size(1024, 768)
-
     try:
         driver.implicitly_wait(3)
         driver.get(project_url)
