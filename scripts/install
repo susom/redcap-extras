@@ -108,8 +108,8 @@ else
   exit 1
 fi
 
-read -p "Enter Username :" Username
-read -p "Enter Password :" Password
+#read -p "Enter Username :" Username
+#read -p "Enter Password :" Password
 
 info 'Starting to Create a Redcap project'
 
