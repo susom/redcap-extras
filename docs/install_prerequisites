@@ -24,7 +24,7 @@ Phantomjs Installation:
 ----------------------
 brew install phantomjs
 	(or)
-You can also directly Download PhatomJs from here http://phantomjs.org/download.html
+You can also directly Download PhantomJs from here http://phantomjs.org/download.html
 
 
 Instructions for Linux users:
@@ -37,11 +37,11 @@ The latest versions of Ubuntu and Fedora come with Python 2.7 out of the box.
 Manual Installation:
 
 wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz
-tar -xzf Python-2.7.6.tgz  
+tar -xzf Python-2.7.6.tgz
 cd Python-2.7.6
-./configure  
-make  
-sudo make install  
+./configure
+make
+sudo make install
 
 Reference : http://stackoverflow.com/questions/6630873/how-to-download-python-from-command-line
 
