@@ -22,7 +22,7 @@ SHARED_FOLDER=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Download a REDCap.zip to install
 OLDWD=`pwd`
-MYTEMP=mktemp -d
+MYTEMP=`mktemp -d`
 cd $MYTEMP
 git clone git@github.com:ctsit/redcap-lts.git
 cd redcap-lts
