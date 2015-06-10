@@ -1,0 +1,14 @@
+language: python
+python: '2.7'
+branches:
+    only:
+        - /^feature.*$/
+before_install: ./vagrant/travis-before-install.sh
+install: sudo ./vagrant/travis-install.sh
+before_script:
+script:
+- curl -s http://localhost/redcap/ | grep -i 'Welcome\|Critical Error'
+- ls /var/www/redcap/
+after_success:
+after_failure:
+after_script:
