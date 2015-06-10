@@ -11,5 +11,6 @@ Host    github.com
     Hostname        github.com
     IdentityFile    ~/.ssh/id_rsa.github
     IdentitiesOnly  yes
+    StrictHostKeyChecking no
 EOF
 
