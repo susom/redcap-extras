@@ -18,3 +18,4 @@ Host    github.com
     StrictHostKeyChecking  no
 EOF
 
+chmod 600 ~/.ssh/config
