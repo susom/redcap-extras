@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ev
 
 # Contributors:
 #    Christopher P. Barnes <senrabc@gmail.com>
