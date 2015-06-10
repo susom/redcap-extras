@@ -3,7 +3,7 @@ python: '2.7'
 branches:
     only:
         - /^feature.*$/
-before_install: sudo ./vagrant/travis-before-install.sh
+before_install: ./vagrant/travis-before-install.sh
 install: sudo ./vagrant/travis-install.sh
 before_script:
 script:
