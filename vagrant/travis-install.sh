@@ -27,9 +27,10 @@ MYTEMP=`mktemp -d`
 cd $MYTEMP
 git clone git@github.com:ctsit/redcap-lts.git
 cd redcap-lts
+REDCAP_FOLDER=`pwd`
 
 # Use the latest redcap*.zip file in the current folder
-REDCAP_ZIP=`ls $SHARED_FOLDER/redcap*.zip | grep "redcap[0-9]\{1,2\}\.[0-9]\{1,2\}\.[0-9]\{1,2\}\.zip" | sort -n | tail -n 1`
+REDCAP_ZIP=`ls redcap*.zip | grep "redcap[0-9]\{1,2\}\.[0-9]\{1,2\}\.[0-9]\{1,2\}\.zip" | sort -n | tail -n 1`
 
 # unless the Travis CI Environment variables ask for a zip file that exists
 if [ -n "$CI_REDCAP_ZIP" ]; then
@@ -39,7 +40,7 @@ if [ -n "$CI_REDCAP_ZIP" ]; then
 fi
 
 # copy the REDCap Zip to the location the install_redcap function expects it
-cp $MYTEMP/redcap-lts/$REDCAP_ZIP $OLDWD/vagrant/
+cp $REDCAP_FOLDER/$REDCAP_ZIP $OLDWD/vagrant/
 
 # restore the old working directory
 cd $OLDWD
