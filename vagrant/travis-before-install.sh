@@ -1,7 +1,6 @@
 #!/bin/bash
 # travis-before-install.sh
 set -ev
-echo $USER
 
 # Decrypt the private key
 openssl aes-256-cbc -K $encrypted_278829cc3907_key -iv $encrypted_278829cc3907_iv -in id_rsa.enc -out ~/.ssh/id_rsa.github -d
@@ -21,6 +20,8 @@ EOF
 
 chmod 600 ~/.ssh/config
 
-sudo cp ~/.ssh/config /root/.ssh/
-sudo cp ~/.ssh/id_rsa.github /root/.ssh/
+sudo mkdir -p /root/.ssh
+sudo chmod 700 /root/.ssh
+sudo cp ~travis/.ssh/config /root/.ssh/
+sudo cp ~travis/.ssh/id_rsa.github /root/.ssh/
 sudo chmod 600 /root/.ssh/id_rsa.github
