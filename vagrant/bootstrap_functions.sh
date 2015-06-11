@@ -38,7 +38,7 @@ function install_redcap() {
     rm -rf /var/www/*
 
     # extract a standard REDCap zip file as downloaded from Vanderbilt.
-    unzip -q $REDCAP_ZIP -d /var/www/
+    unzip -q $SHARED_FOLDER/$REDCAP_ZIP -d /var/www/
 
     # adjust ownership so apache can write to the temp folders
     chown -R www-data.root /var/www/redcap/edocs/
@@ -49,7 +49,7 @@ function install_redcap() {
     rm -rf /var/www/redcap/hooks
 
     # create sym links
-    ln -s /redcap_data/hooks/ /var/www/redcap/ 
+    ln -s /redcap_data/hooks/ /var/www/redcap/
     ln -s /redcap_data/plugins/ /var/www/redcap/
 
 
