@@ -43,6 +43,7 @@ if [ -n "$CI_REDCAP_ZIP" ]; then
 fi
 
 # copy the REDCap Zip to the location the install_redcap function expects it
+echo "Using $REDCAP_FOLDER/$REDCAP_ZIP"
 cp $REDCAP_FOLDER/$REDCAP_ZIP $SHARED_FOLDER/
 
 # restore the old working directory
