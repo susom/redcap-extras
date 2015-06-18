@@ -5,6 +5,9 @@ branches:
         - /^feature.*$/
         - develop
         - master
+env:
+ - CI_REDCAP_ZIP=redcap6.0.5.zip
+ - CI_REDCAP_ZIP=redcap6.5.3.zip
 before_install: ./vagrant/travis-before-install.sh
 install: sudo ./vagrant/travis-install.sh
 before_script:

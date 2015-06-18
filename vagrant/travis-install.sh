@@ -36,6 +36,9 @@ REDCAP_ZIP=`ls redcap*.zip | grep "redcap[0-9]\{1,2\}\.[0-9]\{1,2\}\.[0-9]\{1,2\
 if [ -n "$CI_REDCAP_ZIP" ]; then
     if [ -e $CI_REDCAP_ZIP ]; then
         REDCAP_ZIP=$CI_REDCAP_ZIP
+    else
+        echo "The requested zip file, $CI_REDCAP_ZIP, does not exist at $REDCAP_FOLDER"
+        echo "Defaulting to latest version available in $REDCAP_FOLDER, $REDCAP_ZIP"
     fi
 fi
 
