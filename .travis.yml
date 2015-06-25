@@ -7,13 +7,17 @@ branches:
         - develop
         - master
 env:
-    - CI_REDCAP_ZIP=redcap6.5.3.zip SHARED_FOLDER=./vagrant
+    - CI_REDCAP_ZIP=redcap6.0.5.zip SHARED_FOLDER=./vagrant
 before_install: ./vagrant/travis-before-install.sh
-install: sudo -E ./vagrant/bootstrap.sh
+install:
+    - sudo -E ./vagrant/bootstrap.sh
+    - pip install selenium
 before_script:
 script:
     - curl -s http://localhost/redcap/ | grep -i 'Welcome\|Critical Error'
     - ls /var/www/redcap/
+    - python tests/test_redcap_hooks.py
 after_success:
 after_failure:
+    - curl -T screenshot-test_redcap_hooks.png http://taeber.rapczak.com/ctsit/test_redcap_hooks.php
 after_script:
