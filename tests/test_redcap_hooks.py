@@ -16,10 +16,10 @@ class TestRedcapHooks(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS()
         self.driver.set_window_size(1024, 800)
-        #self.driver = webdriver.Firefox()
+        self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(3)
         self.base_url = "http://localhost"
-        #self.base_url = "http://localhost:8080"
+        self.base_url = "http://localhost:8080"
         self.verificationErrors = []
         self.accept_next_alert = True
 
@@ -49,10 +49,11 @@ class TestRedcapHooks(unittest.TestCase):
             driver.find_element_by_id("field_note").clear()
             driver.find_element_by_id("field_note").send_keys("0-50 (<span class=valid>-1</span> if unknown)")
             driver.find_element_by_xpath("(//button[@type='button'])[2]").click()
-            time.sleep(0.1)
+            time.sleep(0.3)
             driver.find_element_by_link_text("Add / Edit Records").click()
+            time.sleep(0.3)
             driver.find_element_by_link_text("Add / Edit Records").click()
-            time.sleep(0.1)
+            time.sleep(0.3)
             driver.find_element_by_id("inputString").clear()
             driver.find_element_by_id("inputString").send_keys("007")
             driver.find_element_by_id("inputString").send_keys(Keys.ENTER)
