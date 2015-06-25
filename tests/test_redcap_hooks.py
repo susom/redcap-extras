@@ -52,6 +52,7 @@ class TestRedcapHooks(unittest.TestCase):
             time.sleep(0.1)
             driver.find_element_by_link_text("Add / Edit Records").click()
             driver.find_element_by_link_text("Add / Edit Records").click()
+            time.sleep(0.1)
             driver.find_element_by_id("inputString").clear()
             driver.find_element_by_id("inputString").send_keys("007")
             driver.find_element_by_id("inputString").send_keys(Keys.ENTER)
