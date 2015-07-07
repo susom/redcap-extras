@@ -78,7 +78,7 @@ class TestRedcapHooks(unittest.TestCase):
             driver.find_element_by_css_selector("option[value=\"2\"]").click()
             driver.find_element_by_name("submit-btn-saverecord").click()
             time.sleep(0.1)
-            Select(driver.find_element_by_id("record_select2")).select_by_visible_text("2")
+            Select(driver.find_element_by_id("record_select2")).select_by_visible_text("1")
             try: self.assertEqual("-1", driver.find_element_by_name("occurrences").get_attribute("value"))
             except AssertionError as e: self.verificationErrors.append(str(e))
             driver.find_element_by_name("submit-btn-delete").click()
