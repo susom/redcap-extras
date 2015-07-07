@@ -1,6 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+The version numbers shown here are a two part version number.  The first part
+is the REDCap version number against which tests are run.  The second part is
+the version of the hooks and their tests.  These version nunmbers adhere to [Semantic Versioning](http://semver.org/).
+
+
+## [6.5.3-0.1.0] - 2015-07-07
+### Added
+- Add Travis-CI testing (Philip Chase)
+- New Hooks (Taeber Rapczak)
+- Set the REDCap zip used to 6.5.3 (Taeber Rapczak)
+
+### Removed
+- Remove old hooks (Taeber Rapczak)
+
 
 ## [0.0.3] - 2015-04-30
 ### Added
