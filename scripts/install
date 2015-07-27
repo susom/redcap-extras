@@ -1,0 +1,173 @@
+#!/bin/bash
+#
+# Installation Script for Red-Cap Extras
+#
+# Contributors:
+#    Taeber Rapczak <taeber@ufl.edu>
+#    Sanath Kumar Pasumarthy: github.com/sanathp
+#    Philip Chase <philipbchase@gmail.com>
+
+# Copyright (c) 2015, University of Florida
+# All rights reserved.
+#
+# Distributed under the BSD 3-Clause License
+# For full text of the BSD 3-Clause License see http://opensource.org/licenses/BSD-3-Clause
+
+### parameters ################################################################
+
+### functions #################################################################
+
+# Displays usage
+function usage() {
+	echo "Usage:"
+	echo ''
+	echo "${0} name_of_the_project data_dictionary_path"
+	echo ''
+	echo "${0} -h | --help   Show this helpful, usage information"
+	echo ''
+	echo 'The Default Project url is http://127.0.0.1:8080/redcap/index.php'
+	echo 'If Thats Not your Red cap url run the script with url as the 3rd parameter'
+	echo "${0} name_of_the_project data_dictionary_path project_url"
+	echo ''
+}
+
+function info() {
+	echo "${0##*/}: $1"
+}
+
+function error() {
+	>&2 echo "${0##*/}: $1"
+}
+
+# Error handler
+# Will shut down Vagrant
+function on_exit() {
+	ERROR_LEVEL=$?
+
+	if [ 0 -eq $ERROR_LEVEL ]
+	then
+		exit
+	fi
+
+	>&2 echo 'Installation failed.'
+	>&2 echo 'Cleaning up...'
+
+	exit $ERROR_LEVEL
+}
+
+# Checks to see if a required program is installed
+# Example:
+#   check_req 'git' 'which git' 'brew install git'
+function check_req() {
+	NAME=$1
+	TEST_CMD=$2
+	HELP_MSG=$3
+
+	echo -n "[$NAME]: "
+	if eval $TEST_CMD &> /dev/null
+	then
+		echo -e "${green}${passed}${NC}"
+		return 0
+	else
+		echo -e "${red}${failed}${NC}    (try: $HELP_MSG)"
+		global_missing_dep=1
+		return 1
+	fi
+}
+
+### script ####################################################################
+
+COLOR_SWITCH=''
+green='\033[0;32m'
+red='\033[0;31m'
+NC='\033[0m' # No Color
+passed=✔
+failed=✘
+
+# Check command-line arguments
+if [ "${1}" == '-h' ] || [ "${1}" == '--help' ]; then
+	usage
+	exit
+elif [ "${1}" == '--no-color' ]; then
+	COLOR_SWITCH='--no-color'
+	green=''
+	red=''
+	NC=''
+	passed='ok'
+	failed='FAIL'
+elif [ "${1}" != '' ] && [ "${2}" != '' ] && [ "${3}" != '' ]; then
+	PROJECT_NAME=${1}
+    CSV_LOCATION=${2}
+    PROJECT_URL=${3}
+elif [ "${1}" != '' ] && [ "${2}" != '' ]; then
+	PROJECT_NAME=${1}
+    CSV_LOCATION=${2}
+else
+  error "Unrecognized arguments"
+  usage
+  exit 1
+fi
+
+#read -p "Enter Username :" Username
+#read -p "Enter Password :" Password
+
+info 'Starting to Create a Redcap project'
+
+# Check dependencies: phantomjs and selenium
+info 'Checking dependencies...'
+check_req 'phantomjs' 'type phantomjs' 'brew install phantomjs'
+check_req ' selenium' 'pip freeze | grep selenium' 'pip install selenium'
+
+if [ ! -z "$global_missing_dep" ]
+then
+	error 'ERROR! missing dependencies.'
+	error 'Installation failed.'
+	exit 1
+fi
+
+# Get the directory containing this bash script (http://stackoverflow.com/a/246128)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+
+# Exit on first error
+set -e
+
+# Before exiting, run `on_exit`
+trap 'on_exit' EXIT
+info 'Creating REDCap Project... '
+
+PREFIX=$(pwd)
+
+PROJECT_INFO=${PREFIX}/project.info
+
+if [ "$PROJECT_URL" == '' ] ;then
+	python ${DIR}/create-project.py --quiet --project=${PROJECT_NAME} --username=$Username --password=$Password| tee ${PROJECT_INFO}
+else
+	python ${DIR}/create-project.py --quiet --project=${PROJECT_NAME} --url=$PROJECT_URL --username=$Username --password=$Password| tee ${PROJECT_INFO}
+fi
+# Read the dynamically generated API Token from project.info
+API_TOKEN=$(cat $PROJECT_INFO | grep ^API | cut -c11- | sed 's/^ *\(.*\)*$/\1/')
+# Read the dynamically generated Project URL from project.info
+PROJECT_URL=$(cat $PROJECT_INFO | grep ^Project | cut -c20- | sed 's/^ *\(.*\)*$/\1/')
+# Read the dynamically generated Project ID from the PROJECT_URL
+PROJECT_ID=$(echo $PROJECT_URL | grep -o 'pid=[[:digit:]]*' | cut -c5-)
+
+# Merge into one data dictionary and upload
+
+info "Uploading merged data dictionary from:  ${CSV_LOCATION} to $PROJECT_URL"
+if [ "$PROJECT_URL" == '' ] ;then
+		python $DIR/upload-data-dictionary.py --data_dictionary=${CSV_LOCATION} --username=$Username --password=$Password -s
+else
+	python $DIR/upload-data-dictionary.py --url=$PROJECT_URL --data_dictionary=${CSV_LOCATION} --username=$Username --password=$Password -s
+fi
+#TODO: Upload test data from actors
+#      find . -name 'data.csv' -print0 | xargs -0 python import_data.py
+
+info '✓ Huzzah! The installation was a success. ✓'
+info "    open ${PROJECT_URL}"

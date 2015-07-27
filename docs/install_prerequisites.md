@@ -1,0 +1,63 @@
+Instructions for Mac users:
+==========================
+
+Python Installation:
+-------------------
+brew install python
+
+Reference :http://docs.python-guide.org/en/latest/starting/install/osx/
+
+Selenium Installation:
+---------------------
+sudo easy_install selenium
+	(or)
+pip install selenium
+
+Reference :http://selenium-python.readthedocs.org/en/latest/installation.html
+		   http://damien.co/resources/how-to-install-selenium-2-mac-os-x-python-7391
+
+Firefox Installation:
+----------------------
+Download firefox from here : https://support.mozilla.org/en-US/kb/how-download-and-install-firefox-mac
+
+Phantomjs Installation:
+----------------------
+brew install phantomjs
+	(or)
+You can also directly Download PhantomJs from here http://phantomjs.org/download.html
+
+
+Instructions for Linux users:
+============================
+
+Python Installation:
+-------------------
+The latest versions of Ubuntu and Fedora come with Python 2.7 out of the box.
+
+Manual Installation:
+
+wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz
+tar -xzf Python-2.7.6.tgz
+cd Python-2.7.6
+./configure
+make
+sudo make install
+
+Reference : http://stackoverflow.com/questions/6630873/how-to-download-python-from-command-line
+
+Selenium Installation:
+---------------------
+pip install selenium
+
+If You dont have pip .Follow the steps from this url https://pip.pypa.io/en/latest/installing.html
+
+Firefox Installation:
+----------------------
+Download firefox from here : https://support.mozilla.org/en-US/kb/install-firefox-linux
+
+Phantomjs Installation:
+----------------------
+sudo apt-get install phantomjs
+	(or)
+You can also directly Download PhatomJs from here http://phantomjs.org/download.html
+
